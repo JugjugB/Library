@@ -6,6 +6,20 @@
     <link rel="stylesheet" href="lib.css">
 </head>
 <body>
+    <div class="newbookdiv">
+        <button class="newbook">Add book</button>
+        <div class="newbookform">
+            <label for="title">Title: </label>
+            <input type="text" id="title"><br>
+            <label for="author">Author: </label>
+            <input type="text" id="author"><br>
+            <label for="pages">Pages: </label>
+            <input type="number" id="pages"><br>
+            <input type="checkbox" name="read" id="read">
+            <label for="read"> Have you read this book?</label><br>
+            <button id="submit" onclick="newbookfunction();">Submit</button>
+        </div>
+    </div>
     <div class="container"></div>
 </body>
 </html>

@@ -11,9 +11,21 @@
     justify-content: center;
     align-items: center;
     padding: 5px;
+    margin-bottom: 10px;
     border-style: solid;
-}
-
-div {
     white-space: pre;
 }
+
+.newbookdiv {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.newbookdiv input {
+    margin: 5px;
+}
+
+
+
+
+
