@@ -1,11 +1,8 @@
+// initialize container div and library array
 const container = document.querySelector('.container');
+let myLibrary = [];
 
-const myLibrary = [];
-
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-}
-
+// create book constructor
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -19,8 +16,16 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+// create function to add book to library array
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+}
+
+// create function that displays all books from library array to html
 function update(library) {
-  for (i = 0; i < library.length; i++) {
+  container.innerHTML = ''; // clears container div
+  // adds all objects in array (creates div for each property in object)
+  for (i = 0; i < library.length; i++) { 
     let div = document.createElement('div');
     for (const property in library[i]) {
       let contentdiv = document.createElement('div');
@@ -30,16 +35,33 @@ function update(library) {
       }
       div.appendChild(contentdiv);
     }
+    // adds a remove button to each book object
+    let removebutton = document.createElement('button');
+    removebutton.innerText = 'Remove Book';
+    removebutton.setAttribute('class', 'removebutton');
+    removebutton.setAttribute('id', i);
+    div.appendChild(removebutton);
     container.appendChild(div);
   }
+  // adds remove function to each remove button
+  let removebuttons = document.querySelectorAll('.removebutton');
+  removebuttons.forEach((button) => {
+    button.addEventListener(('click'), () => {
+      myLibrary.splice(button.id ,1);
+      update(myLibrary);
+      console.log(myLibrary);
+    })
+  })
 }
 
-myLibrary['HP'] = new Book("Harry Potter and the Philosopher's Stone", 'J.K. Rowling', 500, true);
-addBookToLibrary(myLibrary['HP']);
-myLibrary['LOTR'] = new Book("The Lord of the Rings", 'J.R.R. Tolkien', 1000, false);
-addBookToLibrary(myLibrary['LOTR']);
+// initialize example books (to be removed in future revisions)
+let newbook = new Book("Harry Potter and the Philosopher's Stone", 'J.K. Rowling', 500, true);
+addBookToLibrary(newbook);
+newbook = new Book("The Lord of the Rings", 'J.R.R. Tolkien', 1000, false);
+addBookToLibrary(newbook);
 update(myLibrary);
 
+// Show/Hide functionality to Add Book button
 const newbookform = document.querySelector('.newbookform');
 const newbookbutton = document.querySelector('.newbookbutton');
 newbookbutton.addEventListener(('click'), () => {
@@ -51,9 +73,9 @@ newbookbutton.addEventListener(('click'), () => {
     newbookform.style.display= "none";
     newbookbutton.innerText = "Add Book";
   }
-  
 })
 
+// creates form (not form element) for adding new books
 function newbookfunction() {
   let title = document.querySelector('#title').value;
   let author = document.querySelector('#author').value;
@@ -63,14 +85,14 @@ function newbookfunction() {
     alert('Please fill in all the blanks');
   }
   else {
-    let varname = `${title.split(" ").join("")}`;
-    myLibrary[`${varname}`] = new Book(title, author, pages, read);
-    addBookToLibrary(myLibrary[`${varname}`]);
+    newbook = new Book(title, author, pages, read);
+    addBookToLibrary(newbook);
     container.innerHTML = "";
     update(myLibrary);
   }
-  
 }
+
+
 
 
 

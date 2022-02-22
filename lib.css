@@ -4,7 +4,6 @@
     grid-template-columns: repeat(2, 1fr);
     word-break: break-word;
 }
-
 .container div {
     width: auto;
     padding: 5px;
@@ -13,12 +12,10 @@
     word-break: normal;
     border-style: solid;
 }
-
 .newbookdiv {
     text-align: center;
     margin: 10px;
 }
-
 .newbookdiv input {
     margin: 5px;
 }
