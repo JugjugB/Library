@@ -23,7 +23,7 @@ function addBookToLibrary(book) {
 }
 
 // create function that displays all books from library array to html
-function update(library) {
+function displaybooks(library) {
   container.innerHTML = ''; // clears container div
   // adds all objects in array (creates div for each property in object)
   for (i = 0; i < library.length; i++) { 
@@ -49,7 +49,7 @@ function update(library) {
   removebuttons.forEach((button) => {
     button.addEventListener(('click'), () => {
       myLibrary.splice(button.id ,1);
-      update(myLibrary);
+      displaybooks(myLibrary);
       console.log(myLibrary);
     })
   })
@@ -60,7 +60,7 @@ let newbook = new Book("Harry Potter and the Philosopher's Stone", 'J.K. Rowling
 addBookToLibrary(newbook);
 newbook = new Book("The Lord of the Rings", 'J.R.R. Tolkien', 1000, false);
 addBookToLibrary(newbook);
-update(myLibrary);
+displaybooks(myLibrary);
 
 // Show/Hide functionality to Add Book button
 const newbookform = document.querySelector('.newbookform');
@@ -89,7 +89,7 @@ function newbookfunction() {
     newbook = new Book(title, author, pages, read);
     addBookToLibrary(newbook);
     container.innerHTML = "";
-    update(myLibrary);
+    displaybooks(myLibrary);
   }
 }
 
