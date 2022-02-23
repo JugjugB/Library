@@ -2,6 +2,7 @@
 const container = document.querySelector('.container');
 let myLibrary = [];
 
+
 // create book constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -19,6 +20,7 @@ function Book(title, author, pages, read) {
 // create function to add book to library array
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  localStorage.setItem()
 }
 
 // create function that displays all books from library array to html
