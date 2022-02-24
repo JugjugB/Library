@@ -50,8 +50,8 @@ function displaybooks(library) {
   removebuttons.forEach((button) => {
     button.addEventListener(('click'), () => {
       myLibrary.splice(button.id ,1);
+      localStorage.setItem('books', JSON.stringify(myLibrary));
       displaybooks(myLibrary);
-      console.log(myLibrary);
     })
   })
 }
