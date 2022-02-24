@@ -1,7 +1,8 @@
-// initialize container div and library array
+// initialize container div
 const container = document.querySelector('.container');
-let myLibrary = JSON.parse(localStorage.getItem('books') || "[]");
-console.log(myLibrary);
+
+// retrieve library array from localStorage (returns an empty list if there are no books)
+let myLibrary = JSON.parse(localStorage.getItem('books') || "[]"); 
 
 // create book constructor
 function Book(title, author, pages, read) {
@@ -20,7 +21,7 @@ function Book(title, author, pages, read) {
 // create function to add book to library array
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  localStorage.setItem('books', JSON.stringify(myLibrary));
+  localStorage.setItem('books', JSON.stringify(myLibrary)); // overwrites localStorage with updated array
 }
 
 // create function that displays all books from library array to html
@@ -50,7 +51,7 @@ function displaybooks(library) {
   removebuttons.forEach((button) => {
     button.addEventListener(('click'), () => {
       myLibrary.splice(button.id ,1);
-      localStorage.setItem('books', JSON.stringify(myLibrary));
+      localStorage.setItem('books', JSON.stringify(myLibrary)); // updates localStorage after removing book
       displaybooks(myLibrary);
     })
   })
