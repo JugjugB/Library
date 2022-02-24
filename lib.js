@@ -88,8 +88,3 @@ function newbookfunction() {
 }
 
 displaybooks(myLibrary);
-
-
-
-
-
