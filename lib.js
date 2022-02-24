@@ -30,27 +30,61 @@ function displaybooks(library) {
   // adds all objects in array (creates div for each property in object)
   for (i = 0; i < library.length; i++) { 
     let div = document.createElement('div');
+    div.setAttribute('id', i);
     for (const property in library[i]) {
-      let contentdiv = document.createElement('div');
-      contentdiv.innerText = `${library[i][property]}`;
-      if (property == "title") {
-        contentdiv.style.fontWeight = "bold";
+      if (property != 'read') {
+        let contentdiv = document.createElement('div');
+        contentdiv.innerText = `${library[i][property]}`;
+        if (property == "title") {
+          contentdiv.style.fontWeight = "bold";
+        }
+        div.appendChild(contentdiv);
       }
-      div.appendChild(contentdiv);
     }
+    // adds a read/unread toggle button 
+    let toggleread = document.createElement('button');
+    toggleread.innerText = myLibrary[i]['read'];
+    toggleread.setAttribute('class', 'toggleread');
+    div.appendChild(toggleread);
+
+    // change color of div depending on read/unread toggle
+    if (toggleread.innerText == 'Read') {
+      div.setAttribute('class', 'read')
+    }
+    else if (toggleread.innerText == 'Not Read') {
+      div.setAttribute('class', 'notread')
+    }
+
     // adds a remove button to each book object
     let removebutton = document.createElement('button');
     removebutton.innerText = 'Remove Book';
     removebutton.setAttribute('class', 'removebutton');
-    removebutton.setAttribute('id', i);
+
     div.appendChild(removebutton);
+
     container.appendChild(div);
   }
+  //adds function to toggle read/unread
+  let toggleread = document.querySelectorAll('.toggleread');
+  toggleread.forEach((button) => {
+    button.addEventListener(('click'), () => {
+      if (myLibrary[button.parentElement.id]['read'] == 'Not Read') {
+        myLibrary[button.parentElement.id]['read'] = 'Read';
+      }
+      else {
+        myLibrary[button.parentElement.id]['read'] = 'Not Read';
+      }
+      localStorage.setItem('books', JSON.stringify(myLibrary));
+      displaybooks(myLibrary);
+    })
+  })
+  
+  
   // adds remove function to each remove button
   let removebuttons = document.querySelectorAll('.removebutton');
   removebuttons.forEach((button) => {
     button.addEventListener(('click'), () => {
-      myLibrary.splice(button.id ,1);
+      myLibrary.splice(button.parentElement.id ,1);
       localStorage.setItem('books', JSON.stringify(myLibrary)); // updates localStorage after removing book
       displaybooks(myLibrary);
     })
@@ -87,5 +121,4 @@ function newbookfunction() {
     displaybooks(myLibrary);
   }
 }
-
 displaybooks(myLibrary);

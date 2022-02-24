@@ -19,8 +19,18 @@
 .newbookdiv input {
     margin: 5px;
 }
-
-
+.container .read {
+    background-color: green;
+}
+.container .notread {
+    background-color: red;
+}
+.container>div>div {
+    background-color: white;
+}
+.container>div>button {
+    margin: 5px;
+}
 
 
 
